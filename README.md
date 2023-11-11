@@ -1,5 +1,16 @@
 # Git Tips and Tricks for Effective Developers
 
+- [Git Tips and Tricks for Effective Developers](#git-tips-and-tricks-for-effective-developers)
+  - [Two key advices on Git](#two-key-advices-on-git)
+  - [Some good guides on Git](#some-good-guides-on-git)
+  - [Git daily scenarios with tips](#git-daily-scenarios-with-tips)
+    - [Feature branch workflow](#feature-branch-workflow)
+    - [Pull Request review](#pull-request-review)
+    - [Merge conflicts](#merge-conflicts)
+    - [Preparing commit](#preparing-commit)
+  - [Git effective setup](#git-effective-setup)
+    - [Better git log](#better-git-log)
+
 ## Two key advices on Git
 
 * **Use git in command line**. Don't use apps. Don't use git buttons embedded in your IDE (VSCode, IntelliJ etc.). Git command line client is just a more efficient tool. Much like riding a bycicle: once you learn how to use it, you can use it for the rest of your life.
@@ -175,3 +186,33 @@ git commit -m 'JIR-123 changed something'
 
 It's highly recommended to undestand how `reset` works. [The official documentation page](https://git-scm.com/docs/git-reset) may seem quite vague, so check out this [short](https://stackoverflow.com/a/3528483) and [very short](https://stackoverflow.com/a/50022436) explanation on StackOverflow.
 
+## Git effective setup
+
+### Better git log
+
+You may know that [git log](https://git-scm.com/docs/git-log) has many formatting options. Although, all predefined formats (e.g. `--oneline` and `--short`) have some drawbacks. So, the best way is to set the format string manually.
+
+This code is inpired by [this](https://stackoverflow.com/a/9074343/1849828) StackOverflow answer but have some differences
+
+Add to your `~/.gitconfig`
+
+```
+[alias]
+lg = log --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --first-parent
+lgg = log --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --graph
+```
+
+What the format provides you
+* Short commit hash
+* Relative time
+* Commit message
+* Author name
+* Branches and tags
+* All oneline
+
+
+| Command | Scope | Use Case |
+| - | - | - |
+|`git lg` | Commits from the current branch. No commits from merged feature branches | To check what came from the server. To check that your made your commit in a right place. To explore a new repository |
+|`git lgg` | Commits from the current branch with feature branches. Draws the graph | To check out commits from feature branches |
+|`git lgg --all` | Commits from all branches. Draws the graph | To explore non-merged branches |
