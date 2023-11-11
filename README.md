@@ -51,6 +51,8 @@ git add file_1.py
 # This approach helps you not to spam commits like 'fix', 'fix', 'fix'
 # Caution. Use only in your personal branch!
 git commit --amend --no-edit
+# no-edit keeps commit message unchanged. If you want to change it use
+git commit --amend
 # Force push, rewrite the history
 git push -f
 
@@ -224,6 +226,9 @@ What the format provides you
 |`git lg` | Commits from the current branch. No commits from merged feature branches | To check what came from the server. To check that your made your commit in a right place. To explore a new repository |
 |`git lgg` | Commits from the current branch with feature branches. Draws the graph | To check out commits from feature branches |
 |`git lgg --all` | Commits from all branches. Draws the graph | To explore non-merged branches |
+
+![Alt text](git_log_1.png)
+![Alt text](git_log_2.png)
 
 ### Git status with less
 
