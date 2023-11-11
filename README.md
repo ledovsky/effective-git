@@ -126,3 +126,52 @@ git push -f
 
 # After rebase you will have zero conflicts with master
 ```
+
+### Preparing commit
+
+Add only necessary changes to your commit. Avoid committing `.DS_Store` and other unwanted files.
+
+```
+# Bad approach
+git add .
+# You will end up with unwanted files
+
+# Option 1. Add all files and directories manually
+git add file_1.py
+git add dir_1
+
+# Option 2. Add only changed files automatically
+# Adds no new files
+git add -u
+# Add new files manually
+git add file_2.py
+
+# Don't forget to check the status
+git status
+
+git commit -m 'JIR-123 changed some files'
+```
+
+Problem solving
+
+```
+# You occasionally added an unwanted file to staging
+git add file_1.py
+# Solution
+git reset file_1.py
+
+# You occasionally commited unwanted file
+git add file_1.py file_2.py
+git commit -m 'JIR-123 changed something'
+# Solution
+# Cancel you last commit. Return to the previous one
+# All changes are in staging
+git reset --soft HEAD~1
+# Remove unwanted file from staging
+git reset file_1.py
+# Commit again
+git commit -m 'JIR-123 changed something'
+```
+
+It's highly recommended to undestand how `reset` works. [The official documentation page](https://git-scm.com/docs/git-reset) may seem quite vague, so check out this [short](https://stackoverflow.com/a/3528483) and [very short](https://stackoverflow.com/a/50022436) explanation on StackOverflow.
+
