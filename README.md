@@ -1,5 +1,18 @@
 # Git Tips and Tricks for Effective Developers
 
+## Two key advices on Git
+
+* **Use git in command line**. Don't use apps. Don't use git buttons embedded in your IDE (VSCode, IntelliJ etc.). Git command line client is just a more efficient tool. Much like riding a bycicle: once you learn how to use it, you can use it for the rest of your life.
+* **Spend some time to learn git**. It can save you countless hours in future. Avoid using unreliable tutorials and courses. Instead consider Atlassian's online textbook. Check out recomendations below.
+
+## Some good guides on Git
+
+| Guide                  | Purpose                                              |
+|------------------------|------------------------------------------------------|
+| https://www.atlassian.com/git | A very good textbook. There are parts both for beginners and advanced users |
+| https://ohshitgit.com/ | Common mistakes and problems explained. For everyone |
+| https://learngitbranching.js.org/ | Interactive Git simulator. It's my top recomendation for complete beginners |
+
 ## Git daily scenarios with tips
 
 Disclaimer. Here I consider usage of standard [feature branch workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow). This flow is widely used in modern microservice architecture and CI/CD pipelines.
