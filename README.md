@@ -10,6 +10,7 @@
     - [Preparing commit](#preparing-commit)
   - [Git effective setup](#git-effective-setup)
     - [Better git log](#better-git-log)
+    - [Git status with less](#git-status-with-less)
 
 ## Two key advices on Git
 
@@ -186,6 +187,13 @@ git commit -m 'JIR-123 changed something'
 
 It's highly recommended to undestand how `reset` works. [The official documentation page](https://git-scm.com/docs/git-reset) may seem quite vague, so check out this [short](https://stackoverflow.com/a/3528483) and [very short](https://stackoverflow.com/a/50022436) explanation on StackOverflow.
 
+
+<details>
+<summary>Why not to use .gitignore always</summary>
+<p>Of course, some unwanted files can be added to .gitignore. And you should definetely do it for some common things. But in general, it is ok that you always have some files you don't want to commit in the current moment of time.</p>
+</details>
+
+
 ## Git effective setup
 
 ### Better git log
@@ -216,3 +224,20 @@ What the format provides you
 |`git lg` | Commits from the current branch. No commits from merged feature branches | To check what came from the server. To check that your made your commit in a right place. To explore a new repository |
 |`git lgg` | Commits from the current branch with feature branches. Draws the graph | To check out commits from feature branches |
 |`git lgg --all` | Commits from all branches. Draws the graph | To explore non-merged branches |
+
+### Git status with less
+
+`git status` may become huge. Particularly, when you add dependencies in you repo (like we do in golang). 
+
+In such cases `git status` command returns a very long output that could be annoying. It is possible to use `less` to solve it (I personally use `bat` as `less` substitution)
+
+```
+git status | less
+```
+
+But such output will loose colors which reduces its readability. Add the following to `~/.gitconfig` to fix it 
+
+```
+[color]
+status = always
+```
