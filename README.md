@@ -190,12 +190,6 @@ git commit -m 'JIR-123 changed something'
 It's highly recommended to undestand how `reset` works. [The official documentation page](https://git-scm.com/docs/git-reset) may seem quite vague, so check out this [short](https://stackoverflow.com/a/3528483) and [very short](https://stackoverflow.com/a/50022436) explanation on StackOverflow.
 
 
-<details>
-<summary>Why not to use .gitignore always</summary>
-<p>Of course, some unwanted files can be added to .gitignore. And you should definetely do it for some common things. But in general, it is ok that you always have some files you don't want to commit in the current moment of time.</p>
-</details>
-
-
 ## Git effective setup
 
 ### Better git log
@@ -228,7 +222,7 @@ What the format provides you
 |`git lgg --all` | Commits from all branches. Draws the graph | To explore non-merged branches |
 
 ![Alt text](git_log_1.png)
-![Alt text](git_log_2.png)
+![Alt text](git_log_.png)
 
 ### Git status with less
 
