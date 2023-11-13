@@ -70,12 +70,12 @@ Go through multiple iterations of code review. Commit the changes. Squash 'fix' 
 # Checkout your branch
 git checkout JIR-123-new-feature
 
-# Fix after first iteration
+# Fix after the first review iteration
 git add file_1.py
 git commit -m 'JIR-123 changed file_1.py'
 git push
 
-# Fix after second iteration
+# Fix after the second review iteration
 git add file_1.py
 git commit -m 'JIR-123 changed file_1.py'
 git push
@@ -98,7 +98,7 @@ Note. Some Git hosting services provide an option to merge with squash in UI.
 
 <details>
 <summary>Why you shoudn't use git commit amend / push -f during code review</summary>
-<p>When you rewrite the history, the reviewer comments unlink, and it becomes quite annoying to check that you fixed the code in a way it was intended</p>
+<p>When you rewrite the history, the reviewer can't see what changed from the previous iteration, and it becomes quite annoying to check that you fixed the code in a way it was intended</p>
 </details>
 
 ### Merge conflicts
@@ -222,11 +222,11 @@ What the format provides you
 |`git lgg --all` | Commits from all branches. Draws the graph | To explore non-merged branches |
 
 ![Alt text](git_log_1.png)
-![Alt text](git_log_.png)
+![Alt text](git_log_2.png)
 
 ### Git status with less
 
-`git status` may become huge. Particularly, when you add dependencies in you repo (like we do in golang). 
+`git status` may become huge. Particularly, when you add dependencies in you repo (like we do in golang).
 
 In such cases `git status` command returns a very long output that could be annoying. It is possible to use `less` to solve it (I personally use `bat` as `less` substitution)
 
@@ -234,7 +234,7 @@ In such cases `git status` command returns a very long output that could be anno
 git status | less
 ```
 
-But such output will loose colors which reduces its readability. Add the following to `~/.gitconfig` to fix it 
+But such output will loose colors which reduces its readability. Add the following to `~/.gitconfig` to fix it
 
 ```
 [color]
