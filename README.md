@@ -11,6 +11,7 @@
   - [Git effective setup](#git-effective-setup)
     - [Better git log](#better-git-log)
     - [Git status with less](#git-status-with-less)
+    - [Fuzzy search for branch checkout](#fuzzy-search-for-branch-checkout)
 
 ## Two key advices on Git
 
@@ -196,7 +197,7 @@ git checkout -- file_3.py
 
 It's highly recommended to undestand how `reset` works. [The official documentation page](https://git-scm.com/docs/git-reset) may seem quite vague, so check out this [short](https://stackoverflow.com/a/3528483) and [very short](https://stackoverflow.com/a/50022436) explanation on StackOverflow.
 
-More explanations on `git checkout` for reseting changes can be found in [this](https://stackoverflow.com/questions/7147270/hard-reset-of-a-single-file) StackOverflow topic.
+More explanations of how to use `git checkout` for reseting changes can be found in [this](https://stackoverflow.com/questions/7147270/hard-reset-of-a-single-file) StackOverflow topic.
 
 
 ## Git effective setup
@@ -248,4 +249,57 @@ But such output will loose colors which reduces its readability. Add the followi
 ```
 [color]
 status = always
+```
+
+### Fuzzy search for branch checkout
+
+`git checkout branch-name` can be very annoying in a production level repository because of a very large number of branches. I recommend to use `fzf` command-line tool to perform fuzzy search over branches.
+
+A detailed tutorial on how to set up this feature can be found in [this](https://polothy.github.io/post/2019-08-19-fzf-git-checkout/) post
+
+Here is how it looks
+
+
+![Alt text](git_checkout.png)
+
+TLDR
+
+1. Install [zsh](https://github.com/junegunn/fzf#installation) if you havn't alredy
+2. Add the following code to your `.zshrc`/`.bashrc` config
+3. Use `gch` command instead of `git checkout`
+
+```
+fzf-git-branch() {
+    git rev-parse HEAD > /dev/null 2>&1 || return
+
+    git branch --color=always --all --sort=-committerdate |
+        grep -v HEAD |
+        fzf --height 50% --ansi --no-multi --preview-window right:65% \
+            --preview 'git log -n 50 --color=always --date=short --pretty="format:%C(auto)%cd %h%d %s" $(sed "s/.* //" <<< {})' |
+        sed "s/.* //"
+}
+
+fzf-git-checkout() {
+    git rev-parse HEAD > /dev/null 2>&1 || return
+
+    local branch
+
+    branch=$(fzf-git-branch)
+    if [[ "$branch" = "" ]]; then
+        echo "No branch selected."
+        return
+    fi
+
+    # If branch name starts with 'remotes/' then it is a remote branch. By
+    # using --track and a remote branch name, it is the same as:
+    # git checkout -b branchName --track origin/branchName
+    if [[ "$branch" = 'remotes/'* ]]; then
+        git checkout --track $branch
+    else
+        git checkout $branch;
+    fi
+}
+
+alias gb='fzf-git-branch'
+alias gch='fzf-git-checkout'
 ```
