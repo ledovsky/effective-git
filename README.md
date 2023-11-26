@@ -185,9 +185,18 @@ git reset --soft HEAD~1
 git reset file_1.py
 # Commit again
 git commit -m 'JIR-123 changed something'
+
+# Sometimes you want to abandon some changes before adding files to staging
+# This is equialent to git reset --hard but for a single file
+git checkout file_3.py
+# Disclamer: there is a more safe version
+# It's necessay if the branch and the file have the same names. Not happen in practice
+git checkout -- file_3.py
 ```
 
 It's highly recommended to undestand how `reset` works. [The official documentation page](https://git-scm.com/docs/git-reset) may seem quite vague, so check out this [short](https://stackoverflow.com/a/3528483) and [very short](https://stackoverflow.com/a/50022436) explanation on StackOverflow.
+
+More explanations on `git checkout` for reseting changes can be found in [this](https://stackoverflow.com/questions/7147270/hard-reset-of-a-single-file) StackOverflow topic.
 
 
 ## Git effective setup
